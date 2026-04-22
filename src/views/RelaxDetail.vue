@@ -2,7 +2,9 @@
   <div class="detail-page">
     <div class="detail-header">
       <button class="back-btn" @click="goBack">
-        ← 返回
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15,18 9,12 15,6"></polyline>
+        </svg>
       </button>
     </div>
 
@@ -10,7 +12,10 @@
       <div class="detail-image">
         <img :src="method.image" :alt="method.title" />
         <div class="duration-badge">
-          <span class="badge-icon">⏱️</span>
+          <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12,6 12,12 16,14"></polyline>
+          </svg>
           {{ method.duration }}分钟
         </div>
       </div>
@@ -43,7 +48,11 @@
         </div>
 
         <div class="tips-section">
-          <div class="tips-icon">💡</div>
+          <svg class="tips-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9.66 3.74A7 7 0 0 1 19 11c0 2.48-1.21 4.68-3 6.17V21a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-3.83C6.21 15.68 5 13.48 5 11a7 7 0 0 1 4.66-7.26"></path>
+            <path d="M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-2H9v2z"></path>
+            <path d="M9 18h6"></path>
+          </svg>
           <div class="tips-content">
             <h3 class="tips-title">温馨提示</h3>
             <p class="tips-text">
@@ -55,7 +64,10 @@
     </div>
 
     <div v-else class="loading-state">
-      <div class="loading-icon">🔄</div>
+      <svg class="loading-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="23,4 23,10 17,10"></polyline>
+        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+      </svg>
       <p>加载中...</p>
     </div>
   </div>
@@ -114,8 +126,14 @@ onMounted(() => {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+.back-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--text-primary);
+}
+
 .detail-content {
-  padding-bottom: 20px;
+  padding-bottom: 100px;
 }
 
 .detail-image {
@@ -146,7 +164,9 @@ onMounted(() => {
 }
 
 .badge-icon {
-  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
 }
 
 .detail-body {
@@ -255,7 +275,9 @@ onMounted(() => {
 }
 
 .tips-icon {
-  font-size: 28px;
+  width: 28px;
+  height: 28px;
+  stroke: var(--warning-color);
   flex-shrink: 0;
 }
 
@@ -286,7 +308,9 @@ onMounted(() => {
 }
 
 .loading-icon {
-  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  stroke: var(--text-light);
   margin-bottom: 16px;
   animation: spin 1s linear infinite;
 }

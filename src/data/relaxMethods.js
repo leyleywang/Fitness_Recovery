@@ -2,37 +2,37 @@ export const muscleGroups = [
   {
     id: 'neck',
     name: '颈部',
-    icon: '🧘'
+    icon: 'neck'
   },
   {
     id: 'shoulders',
     name: '肩部',
-    icon: '💪'
+    icon: 'shoulder'
   },
   {
     id: 'back',
     name: '背部',
-    icon: '🦴'
+    icon: 'backMuscle'
   },
   {
     id: 'chest',
     name: '胸部',
-    icon: '❤️'
+    icon: 'chest'
   },
   {
     id: 'arms',
     name: '手臂',
-    icon: '🦾'
+    icon: 'arm'
   },
   {
     id: 'legs',
     name: '腿部',
-    icon: '🦵'
+    icon: 'leg'
   },
   {
     id: 'glutes',
     name: '臀部',
-    icon: '🍑'
+    icon: 'glutes'
   }
 ]
 

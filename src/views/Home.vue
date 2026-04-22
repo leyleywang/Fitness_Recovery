@@ -6,30 +6,23 @@
         <p class="page-subtitle">选择合适的放松方式，帮助肌肉恢复</p>
       </div>
 
-      <div class="filter-tabs">
-        <button
-          v-for="category in categories"
-          :key="category.value"
-          class="filter-tab"
-          :class="{ active: activeCategory === category.value }"
-          @click="activeCategory = category.value"
-        >
-          {{ category.label }}
-        </button>
-      </div>
-
-      <div class="muscle-filter">
-        <div class="filter-label">按部位筛选:</div>
-        <div class="muscle-chips">
-          <span
-            v-for="muscle in muscleGroups"
-            :key="muscle.id"
-            class="muscle-chip"
-            :class="{ active: activeMuscle === muscle.id }"
-            @click="activeMuscle = activeMuscle === muscle.id ? null : muscle.id"
-          >
-            {{ muscle.icon }} {{ muscle.name }}
-          </span>
+      <div class="filter-row">
+        <div class="filter-select-wrapper">
+          <label class="filter-label">类型</label>
+          <select class="filter-select" v-model="activeCategory">
+            <option :value="null">全部</option>
+            <option value="foam-roller">泡沫轴</option>
+            <option value="massage-gun">筋膜枪</option>
+          </select>
+        </div>
+        <div class="filter-select-wrapper">
+          <label class="filter-label">部位</label>
+          <select class="filter-select" v-model="activeMuscle">
+            <option :value="null">全部部位</option>
+            <option v-for="muscle in muscleGroups" :key="muscle.id" :value="muscle.id">
+              {{ muscle.name }}
+            </option>
+          </select>
         </div>
       </div>
 
@@ -49,21 +42,35 @@
             <p class="card-desc">{{ method.description }}</p>
             <div class="card-meta">
               <span class="meta-item">
-                <span class="meta-icon">⏱️</span>
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12,6 12,12 16,14"></polyline>
+                </svg>
                 {{ method.duration }}分钟
               </span>
               <span class="meta-item">
-                <span class="meta-icon">🎯</span>
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="2"></circle>
+                  <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"></path>
+                  <path d="M12 2a10 10 0 0 1 10 10"></path>
+                </svg>
                 {{ method.muscleGroupName }}
               </span>
             </div>
           </div>
-          <div class="card-arrow">→</div>
+          <div class="card-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </div>
         </div>
       </div>
 
       <div v-if="filteredMethods.length === 0" class="empty-state">
-        <div class="empty-icon">🔍</div>
+        <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
         <p class="empty-text">暂无相关放松方法</p>
       </div>
     </div>
@@ -116,62 +123,43 @@ const goToDetail = (id) => {
   color: var(--text-secondary);
 }
 
-.filter-tabs {
+.filter-row {
   display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-.filter-tab {
-  padding: 8px 16px;
-  border: 1px solid var(--border-color);
-  background-color: var(--bg-primary);
-  border-radius: 20px;
-  font-size: 14px;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.filter-tab.active {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
-  color: white;
-}
-
-.muscle-filter {
+  gap: 12px;
   margin-bottom: 20px;
 }
 
-.filter-label {
-  font-size: 14px;
-  color: var(--text-secondary);
-  margin-bottom: 10px;
-}
-
-.muscle-chips {
+.filter-select-wrapper {
+  flex: 1;
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.muscle-chip {
-  display: inline-flex;
-  align-items: center;
-  padding: 8px 12px;
-  background-color: var(--bg-primary);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  font-size: 14px;
+.filter-label {
+  font-size: 12px;
   color: var(--text-secondary);
-  cursor: pointer;
-  transition: all 0.3s ease;
+  font-weight: 500;
 }
 
-.muscle-chip.active {
-  background-color: rgba(74, 144, 217, 0.1);
+.filter-select {
+  padding: 10px 32px 10px 12px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--text-primary);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23999' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+}
+
+.filter-select:focus {
+  outline: none;
   border-color: var(--primary-color);
-  color: var(--primary-color);
 }
 
 .relax-list {
@@ -256,8 +244,10 @@ const goToDetail = (id) => {
 }
 
 .meta-icon {
+  width: 14px;
+  height: 14px;
   margin-right: 4px;
-  font-size: 14px;
+  stroke: currentColor;
 }
 
 .card-arrow {
@@ -265,8 +255,12 @@ const goToDetail = (id) => {
   align-items: center;
   padding-right: 12px;
   color: var(--text-light);
-  font-size: 20px;
-  font-weight: 300;
+}
+
+.card-arrow svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
 }
 
 .empty-state {
@@ -275,8 +269,10 @@ const goToDetail = (id) => {
 }
 
 .empty-icon {
-  font-size: 64px;
+  width: 64px;
+  height: 64px;
   margin-bottom: 16px;
+  stroke: var(--text-light);
 }
 
 .empty-text {
