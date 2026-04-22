@@ -364,6 +364,9 @@ onUnmounted(() => {
   background-color: var(--bg-secondary);
   display: flex;
   flex-direction: column;
+  max-width: 500px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .training-header {
