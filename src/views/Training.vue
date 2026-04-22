@@ -1,13 +1,15 @@
 <template>
   <div class="training-page">
     <div class="training-header">
-      <button class="back-btn" @click="goBack">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="15,18 9,12 15,6"></polyline>
-        </svg>
-      </button>
-      <h1 class="header-title">新建训练</h1>
-      <div class="header-placeholder"></div>
+      <div class="training-header-inner">
+        <button class="back-btn" @click="goBack">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15,18 9,12 15,6"></polyline>
+          </svg>
+        </button>
+        <h1 class="header-title">新建训练</h1>
+        <div class="header-placeholder"></div>
+      </div>
     </div>
 
     <div v-if="step === 1" class="step-content fade-in">
@@ -364,18 +366,30 @@ onUnmounted(() => {
   background-color: var(--bg-secondary);
   display: flex;
   flex-direction: column;
-  max-width: 500px;
-  margin: 0 auto;
   width: 100%;
 }
 
 .training-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 16px;
   background-color: var(--bg-primary);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.training-header-inner {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .back-btn {
@@ -408,8 +422,7 @@ onUnmounted(() => {
 
 .step-content {
   flex: 1;
-  padding: 20px 16px;
-  padding-bottom: 100px;
+  padding: 92px 16px 100px;
 }
 
 .form-section {
