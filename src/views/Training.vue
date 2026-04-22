@@ -2,7 +2,9 @@
   <div class="training-page">
     <div class="training-header">
       <button class="back-btn" @click="goBack">
-        ← 返回
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15,18 9,12 15,6"></polyline>
+        </svg>
       </button>
       <h1 class="header-title">新建训练</h1>
       <div class="header-placeholder"></div>
@@ -19,7 +21,44 @@
             :class="{ active: selectedMuscle === muscle.id }"
             @click="selectedMuscle = muscle.id"
           >
-            <span class="muscle-icon">{{ muscle.icon }}</span>
+            <svg class="muscle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <g v-if="muscle.icon === 'neck'">
+                <circle cx="12" cy="8" r="6"></circle>
+                <path d="M9 14v3a3 3 0 0 1-3 3h-1"></path>
+                <path d="M15 14v3a3 3 0 0 0 3 3h1"></path>
+              </g>
+              <g v-else-if="muscle.icon === 'shoulder'">
+                <circle cx="12" cy="6" r="3"></circle>
+                <path d="M12 9v4"></path>
+                <path d="M8 13h8"></path>
+                <path d="M5 17l-1 4"></path>
+                <path d="M19 17l1 4"></path>
+              </g>
+              <g v-else-if="muscle.icon === 'backMuscle'">
+                <path d="M4 12l6 3 6-3 6 3v4l-12 6-12-6z"></path>
+                <path d="M10 15l2 4 2-4"></path>
+              </g>
+              <g v-else-if="muscle.icon === 'chest'">
+                <path d="M4 12h16v6a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"></path>
+                <path d="M8 12V6a4 4 0 0 1 8 0v6"></path>
+              </g>
+              <g v-else-if="muscle.icon === 'arm'">
+                <path d="M6 10h12"></path>
+                <path d="M10 10l2 8 2-8"></path>
+                <circle cx="18" cy="10" r="2"></circle>
+                <circle cx="6" cy="10" r="2"></circle>
+              </g>
+              <g v-else-if="muscle.icon === 'leg'">
+                <path d="M12 4v8"></path>
+                <path d="M12 12l-4 8"></path>
+                <path d="M12 12l4 8"></path>
+                <circle cx="12" cy="4" r="2"></circle>
+              </g>
+              <g v-else-if="muscle.icon === 'glutes'">
+                <ellipse cx="12" cy="12" rx="10" ry="6"></ellipse>
+                <path d="M12 6v12"></path>
+              </g>
+            </svg>
             <span class="muscle-name">{{ muscle.name }}</span>
           </div>
         </div>
@@ -84,12 +123,20 @@
       </div>
 
       <div class="timer-tips">
-        <p>⏱️ 时间到后会自动提醒结束训练</p>
+        <p>
+          <svg class="tip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12,6 12,12 16,14"></polyline>
+          </svg>
+          时间到后会自动提醒结束训练
+        </p>
       </div>
     </div>
 
     <div v-if="step === 3" class="result-section fade-in">
-      <div class="result-icon">🎉</div>
+      <svg class="result-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+      </svg>
       <h2 class="result-title">训练完成！</h2>
       <p class="result-desc">
         您已完成 <span class="result-highlight">{{ selectedDuration || customDuration }}分钟</span> 的
@@ -112,10 +159,20 @@
               <h4 class="recommend-name">{{ method.title }}</h4>
               <div class="recommend-meta">
                 <span class="meta-tag">{{ method.categoryName }}</span>
-                <span class="meta-time">⏱️ {{ method.duration }}分钟</span>
+                <span class="meta-time">
+                  <svg class="time-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12,6 12,12 16,14"></polyline>
+                  </svg>
+                  {{ method.duration }}分钟
+                </span>
               </div>
             </div>
-            <div class="recommend-arrow">→</div>
+            <div class="recommend-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </div>
           </div>
         </div>
       </div>
@@ -144,7 +201,12 @@
 
     <div v-if="showTimeUpModal" class="modal-overlay" @click="showTimeUpModal = false">
       <div class="modal-content" @click.stop>
-        <div class="timeup-icon">⏰</div>
+        <svg class="timeup-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12,6 12,12 16,14"></polyline>
+          <path d="M16.5 3.5l2-2"></path>
+          <path d="M7.5 3.5l-2-2"></path>
+        </svg>
         <h3 class="modal-title">训练时间到！</h3>
         <p class="modal-desc">是否结束本次训练？</p>
         <div class="modal-actions">
@@ -314,12 +376,21 @@ onUnmounted(() => {
 }
 
 .back-btn {
-  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
   background-color: transparent;
   border: none;
-  font-size: 16px;
   color: var(--primary-color);
   cursor: pointer;
+}
+
+.back-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
 }
 
 .header-title {
@@ -375,8 +446,14 @@ onUnmounted(() => {
 }
 
 .muscle-icon {
-  font-size: 32px;
+  width: 32px;
+  height: 32px;
   margin-bottom: 8px;
+  stroke: var(--text-light);
+}
+
+.muscle-item.active .muscle-icon {
+  stroke: var(--primary-color);
 }
 
 .muscle-name {
@@ -581,6 +658,19 @@ onUnmounted(() => {
   font-size: 14px;
 }
 
+.timer-tips p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.tip-icon {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+}
+
 .result-section {
   flex: 1;
   padding: 40px 20px;
@@ -588,8 +678,10 @@ onUnmounted(() => {
 }
 
 .result-icon {
-  font-size: 80px;
+  width: 80px;
+  height: 80px;
   margin-bottom: 20px;
+  stroke: var(--primary-color);
 }
 
 .result-title {
@@ -688,12 +780,25 @@ onUnmounted(() => {
 .meta-time {
   font-size: 12px;
   color: var(--text-light);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.time-icon {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
 }
 
 .recommend-arrow {
-  font-size: 20px;
   color: var(--text-light);
-  font-weight: 300;
+}
+
+.recommend-arrow svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
 }
 
 .result-actions {
@@ -724,8 +829,10 @@ onUnmounted(() => {
 }
 
 .timeup-icon {
-  font-size: 64px;
+  width: 64px;
+  height: 64px;
   margin-bottom: 16px;
+  stroke: var(--warning-color);
 }
 
 .modal-title {

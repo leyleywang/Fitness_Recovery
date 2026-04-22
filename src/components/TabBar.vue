@@ -7,7 +7,16 @@
       :class="{ active: isActive(item.path) }"
       @click="navigateTo(item.path)"
     >
-      <span class="tab-icon">{{ item.icon }}</span>
+      <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path v-if="item.iconName === 'home'" d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+        <polyline v-if="item.iconName === 'home'" points="9,22 9,12 15,12 15,22"></polyline>
+        <path v-if="item.iconName === 'journal'" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+        <polyline v-if="item.iconName === 'journal'" points="14,2 14,8 20,8"></polyline>
+        <line v-if="item.iconName === 'journal'" x1="16" y1="13" x2="8" y2="13"></line>
+        <line v-if="item.iconName === 'journal'" x1="16" y1="17" x2="8" y2="17"></line>
+        <path v-if="item.iconName === 'profile'" d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+        <circle v-if="item.iconName === 'profile'" cx="12" cy="7" r="4"></circle>
+      </svg>
       <span class="tab-label">{{ item.label }}</span>
     </div>
   </div>
@@ -23,17 +32,17 @@ const tabs = [
   {
     path: '/home',
     label: '首页',
-    icon: '🏠'
+    iconName: 'home'
   },
   {
     path: '/journal',
     label: '日记',
-    icon: '📝'
+    iconName: 'journal'
   },
   {
     path: '/profile',
     label: '我的',
-    icon: '👤'
+    iconName: 'profile'
   }
 ]
 
@@ -73,11 +82,12 @@ const navigateTo = (path) => {
 }
 
 .tab-icon {
-  font-size: 24px;
-  line-height: 1;
+  width: 24px;
+  height: 24px;
   margin-bottom: 4px;
   opacity: 0.6;
   transition: all 0.3s ease;
+  stroke: var(--text-light);
 }
 
 .tab-label {
@@ -89,6 +99,7 @@ const navigateTo = (path) => {
 .tab-item.active .tab-icon {
   opacity: 1;
   transform: scale(1.1);
+  stroke: var(--primary-color);
 }
 
 .tab-item.active .tab-label {

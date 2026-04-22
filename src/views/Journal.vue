@@ -6,7 +6,11 @@
     </div>
 
     <div v-if="todayStats.isOverFatigue" class="fatigue-warning">
-      <div class="warning-icon">⚠️</div>
+      <svg class="warning-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+        <line x1="12" y1="9" x2="12" y2="13"></line>
+        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+      </svg>
       <div class="warning-content">
         <h3 class="warning-title">疲劳提醒</h3>
         <p class="warning-text">{{ todayStats.fatigueMessage }}</p>
@@ -51,7 +55,10 @@
                 v-if="isDateOverFatigue(journals)"
                 class="stat-badge stat-badge-warning"
               >
-                ⚠️ 疲劳
+                <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                </svg>
+                疲劳
               </span>
             </div>
           </div>
@@ -64,7 +71,10 @@
             >
               <div class="journal-main">
                 <div class="journal-muscle">
-                  <span class="muscle-icon">{{ getMuscleIcon(journal.muscleGroup) }}</span>
+                  <svg class="muscle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 12h16v6a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"></path>
+                    <path d="M8 12V8a4 4 0 0 1 8 0v4"></path>
+                  </svg>
                   <div class="muscle-info">
                     <span class="muscle-name">{{ journal.muscleGroupName }}</span>
                     <span class="train-time">{{ formatTime(journal.createdAt) }}</span>
@@ -82,7 +92,14 @@
                     class="status-badge"
                     :class="journal.isStretched ? 'status-done' : 'status-pending'"
                   >
-                    {{ journal.isStretched ? '✅ 已拉伸' : '⏳ 待拉伸' }}
+                    <svg v-if="journal.isStretched" class="status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20,6 9,17 4,12"></polyline>
+                    </svg>
+                    <svg v-else class="status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12,6 12,12 16,14"></polyline>
+                    </svg>
+                    {{ journal.isStretched ? '已拉伸' : '待拉伸' }}
                   </span>
                 </div>
                 <div class="stretch-actions">
@@ -91,7 +108,11 @@
                     class="stretch-btn"
                     @click="goToStretch(journal)"
                   >
-                    🎯 去拉伸
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="2"></circle>
+                      <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"></path>
+                    </svg>
+                    去拉伸
                   </button>
                   <button
                     v-if="!journal.isStretched"
@@ -108,7 +129,13 @@
       </template>
 
       <div v-else class="empty-journal">
-        <div class="empty-icon">📝</div>
+        <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14,2 14,8 20,8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <line x1="10" y1="9" x2="8" y2="9"></line>
+        </svg>
         <h3 class="empty-title">暂无训练记录</h3>
         <p class="empty-desc">点击右下角"新建日记"开始记录您的训练</p>
       </div>
@@ -219,8 +246,10 @@ const goToStretch = (journal) => {
 }
 
 .warning-icon {
-  font-size: 32px;
+  width: 32px;
+  height: 32px;
   flex-shrink: 0;
+  stroke: var(--danger-color);
 }
 
 .warning-content {
@@ -327,6 +356,15 @@ const goToStretch = (journal) => {
 .stat-badge-warning {
   background-color: rgba(250, 173, 20, 0.1);
   color: var(--warning-color);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.badge-icon {
+  width: 12px;
+  height: 12px;
+  stroke: currentColor;
 }
 
 .journal-items {
@@ -356,7 +394,9 @@ const goToStretch = (journal) => {
 }
 
 .muscle-icon {
-  font-size: 36px;
+  width: 36px;
+  height: 36px;
+  stroke: var(--primary-color);
 }
 
 .muscle-info {
@@ -403,6 +443,15 @@ const goToStretch = (journal) => {
   border-radius: 12px;
   font-size: 13px;
   font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-icon {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
 }
 
 .status-done {
@@ -430,6 +479,15 @@ const goToStretch = (journal) => {
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-icon {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
 }
 
 .stretch-btn:active {
@@ -455,8 +513,10 @@ const goToStretch = (journal) => {
 }
 
 .empty-icon {
-  font-size: 72px;
+  width: 72px;
+  height: 72px;
   margin-bottom: 20px;
+  stroke: var(--text-light);
 }
 
 .empty-title {
